@@ -7,7 +7,9 @@ function formatDate(value){
   return `${date.getFullYear()}. ${date.getMonth()+1}. ${date.getDate()}`;
 }
 
-function ReviewListItem({item}){
+function ReviewListItem({item, onDelete}){
+  const deleteClick = ()=>onDelete(item.id);
+
   return (
     <div className="ReivewListItem">
       <img src={item.imgUrl} alt={item.title} className="ReivewListItem-img" />
@@ -16,16 +18,18 @@ function ReviewListItem({item}){
         <p><StarRating selectedStars={item.rating} /></p>
         <p>{formatDate(item.createdAt)}</p>
         <p>{item.content}</p>
+        <button onClick={deleteClick}>삭제</button>
       </div>
+
     </div>
   );
 }
 
-export default function ReviewList({items}){
+export default function ReviewList({items, onDelete}){
   return(
     <ul className="ReviewList">
       {items.map((item, i)=>{
-         return <li key={i}><ReviewListItem item={item}/></li>;
+         return <li key={i}><ReviewListItem item={item} onDelete={onDelete}/></li>;
       })}
     </ul>
   );
