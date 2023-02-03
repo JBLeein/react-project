@@ -1,10 +1,10 @@
-import React from "react";
 import "./ReviewList.css"
+import StarRating from "./StarRating";
 
 // createdAt 날짜 변환 함수 
 function formatDate(value){
   const date = new Date(value);
-  return `개봉일 - ${date.getFullYear()}. ${date.getMonth()+1}. ${date.getDate()}`;
+  return `${date.getFullYear()}. ${date.getMonth()+1}. ${date.getDate()}`;
 }
 
 function ReviewListItem({item}){
@@ -13,9 +13,9 @@ function ReviewListItem({item}){
       <img src={item.imgUrl} alt={item.title} className="ReivewListItem-img" />
       <div>
         <h1>{item.title}</h1>
-        <p>{item.rating}</p>
-        <p>{item.content}</p>
+        <p><StarRating selectedStars={item.rating} /></p>
         <p>{formatDate(item.createdAt)}</p>
+        <p>{item.content}</p>
       </div>
     </div>
   );
@@ -23,9 +23,9 @@ function ReviewListItem({item}){
 
 export default function ReviewList({items}){
   return(
-    <ul>
-      {items.map((item)=>{
-         return <li><ReviewListItem item={item}/></li>;
+    <ul className="ReviewList">
+      {items.map((item, i)=>{
+         return <li key={i}><ReviewListItem item={item}/></li>;
       })}
     </ul>
   );

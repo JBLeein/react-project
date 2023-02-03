@@ -1,3 +1,7 @@
+.ReviewList {
+  list-style: none;
+}
+
 .ReivewListItem {
   display: flex;
   padding: 10px;
